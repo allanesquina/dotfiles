@@ -1,87 +1,151 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-" ================ General Config ====================
-"
-set number                      "Line numbers are good
-set backspace=indent,eol,start  "Allow backspace in insert mode
-set history=1000                "Store lots of :cmdline history
-set showcmd                     "Show incomplete cmds down the bottom
-set showmode                    "Show current mode down the bottom
-set gcr=a:blinkon0              "Disable cursor blink
-set visualbell                  "No sounds
-set autoread                    "Reload files changed outside vim
-set cursorline
-
-" This makes vim act like all other editors, buffers can
-" exist in the background without being in a window.
-" http://items.sjbach.com/319/configuring-vim-right
-set hidden
-
-" =============== Vundle Initialization ===============
-" " This loads all the plugins specified in ~/.vim/vundles.vim
-" " Use Vundle plugin to manage all other plugins
-if filereadable(expand("~/.vim/vundle.vim"))
-  source ~/.vim/vundle.vim
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
+" Plugins will be downloaded under the specified directory.  
+call plug#begin('~/.vim/plugged')
 
-" ================ Turn Off Swap Files ==============
-"
-set noswapfile
-set nobackup
-set nowb
+" Declare the list of plugins.
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+Plug 'mattn/emmet-vim', { 'for': 'html' }
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'peterhoeg/vim-qml', { 'for': 'qml' }
+Plug 'ElmCast/elm-vim', { 'for': 'elm' }
+Plug 'tpope/vim-rails', { 'for': ['ruby', 'eruby'] }
+Plug 'tpope/vim-rails', { 'for': ['ruby', 'eruby'] }
+Plug 'rking/ag.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'ivalkeen/vim-ctrlp-tjump'
+Plug 'mileszs/ack.vim' 
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } 
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-ragtag'
+Plug 'Raimondi/delimitMate'
+Plug 'mattn/webapi-vim'
+Plug 'mattn/gist-vim'
+Plug 'w0ng/vim-hybrid'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-scripts/dbext.vim'
+Plug 'alvan/vim-closetag'
+Plug 'exitface/synthwave.vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'airblade/vim-gitgutter'
 
-" ================ Indentation ======================
-"
-set autoindent
-set smartindent
-set smarttab
-set shiftwidth=4
-set softtabstop=4
-set tabstop=4
-set expandtab
+" List ends here. Plugins become visible to Vim after this call.  
+call plug#end()
+
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.php,*.jsx,*.js"
+
+syntax on
+
+highlight BadWhitespace ctermbg=red guibg=red
+hi CursorLine term=bold cterm=bold guibg=Grey40
+
+"colorscheme solarized
+"colorscheme synthwave
+colorscheme hybrid_material
+
+"set guifont=DejaVu\ Sans\ Mono\ 12 
+set guifont=Monospace\ 12
 
 filetype plugin on
 filetype indent on
 
-
-
-
-" Display tabs and trailing spaces visually
-" set list listchars=tab:\ \ ,trail:·
-"
-set nowrap       "Don't wrap lines
-set linebreak    "Wrap lines at convenient points
-
-" ================ Scrolling ========================
-"
-set scrolloff=8         "Start scrolling when we're 8 lines away from margins
-set sidescrolloff=15
-set sidescroll=1
-
-nnoremap <silent> \t :NERDTreeFind<CR>
-nnoremap <silent> ,i :JavaImport<CR>
-nnoremap <silent> ,i :JavaImport<CR>
-
-syntax enable
+set encoding=utf-8
+set bg=dark
 set background=dark
-colorscheme hybrid
-let g:solarized_termcolors=256
-set clipboard=unnamedplus
+set autoindent
+set hlsearch
+set number
+set hidden
+set backupcopy=yes
+set nowrap
 
-so ~/.vim/settings.vim
+"vim-airline"
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+ let g:airline_symbols.space = "\ua0"
 
-autocmd Filetype html setlocal ts=2 sts=2 sw=2
-autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
-autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
-
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.class,*/target/*,*/node_modules/*,*/bower_components/*
-set wildignore+=*/dist/*
-
-"let g:EclimCompletionMethod = 'omnifunc'
+let g:airline_theme='hybrid'
+"let g:airline_theme='powerlineish'
+"let g:airline_theme='solarized'
 "
-"if !exists('g:neocomplcache_force_omni_patterns')
-"    let g:neocomplcache_force_omni_patterns = {}
-"endif
-"let g:neocomplcache_force_omni_patterns.java = '\k\.\k*'
-"let g:neocomplcache_force_omni_patterns.scala = '\k\.\k*'
+" no temp or backup files
+set noswapfile
+set nobackup
+set nowritebackup
+set omnifunc=syntaxcomplete#Complete
+set t_Co=256
+
+" JS configuration
+au BufRead,BufNewFile *.js set expandtab
+au BufRead,BufNewFile *.js set tabstop=2
+au BufRead,BufNewFile *.js set softtabstop=2
+au BufRead,BufNewFile *.js set shiftwidth=2
+au BufRead,BufNewFile *.js set autoindent
+au BufRead,BufNewFile *.js match BadWhitespace /^\t\+/
+au BufRead,BufNewFile *.js match BadWhitespace /\s\+$/
+au BufNewFile *.js set fileformat=unix
+au BufRead,BufNewFile *.js let b:comment_leader = '//'
+
+let g:javascript_plugin_jsdoc = 1
+let g:jsx_ext_required = 0
+
+" Packages
+let g:ctrlp_custom_ignore = {
+ \ 'dir': '\.git$\|\.yardoc\|build|dist|bower_components|node_modules|public$|log\|tmp$',
+ \ 'file': '\.so$\|\.dat$|\.DS_Store$'
+ \ }
+
+" Key Commands
+map <C-\> :NERDTreeToggle<CR>
+
+set wildignore+=*/node_modules/*
+
+let g:used_javascript_libs = 'react'
+
+"NerdTree config
+let NERDTreeShowHidden=1
+
+noremap <silent> <C-S>          :update<CR>
+vnoremap <silent> <C-S>         <C-C>:update<CR>
+inoremap <silent> <C-S>         <C-O>:update<CR>
+
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1 
+let g:syntastic_check_on_open = 0 
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exe = 'yarn lint:js'
+let g:syntastic_skip_checks = 1
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files"
+let g:syntastic_mode_map = { "mode": "passive" }
+
+set guioptions=i
+set guioptions-=r
+
+
+" Clipboard copy/paste
+:set clipboard=unnamed
+" Highlight current line
+:set cursorline
+

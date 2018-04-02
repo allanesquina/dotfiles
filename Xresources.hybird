@@ -1,4 +1,4 @@
-Xft.dpi: 144
+Xft.dpi: 130
 Xft.autohint: 0
 Xft.lcdfilter:  lcddefault
 Xft.hintstyle:  hintfull
@@ -9,7 +9,7 @@ Xft.rgba: rgb
 XTerm.termName: xterm-256color
 XTerm*renderFont: true
 XTerm*faceName: DejaVu Sans Mono for Powerline
-XTerm*faceSize: 12
+XTerm*faceSize: 10 
 
 XTerm.vt100.saveLines: 6096
 XTerm.vt100.scrollBar: true

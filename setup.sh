@@ -63,7 +63,9 @@ setup() {
 	myecho "Configuring Keyboard speed rate"
 	xset r rate 185 70
 	sayok
+
 }
+
 applications() {
 	# Vim instalation
 	myecho "Vim"
@@ -85,6 +87,10 @@ applications() {
 	sudo apt-get install xterm
 	ln -s $DOTFILES/Xresources.hybird $HOME/.Xdefaults
 	xrdb .Xdefaults
+	sayok
+	# Ag search
+	myecho "Ag search"
+	sudo apt-get install silversearcher-ag 
 	sayok
 }
 

@@ -108,7 +108,7 @@ xtermSetup() {
 	myecho "Xterm"
 	sudo apt-get install xterm
 	ln -sf $DOTFILES/Xresources.hybird $HOME/.Xdefaults
-	xrdb .Xdefaults
+	xterm -e "xrdb ${HOME}/.Xdefaults"
 	sayok
 }
 

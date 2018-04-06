@@ -5,12 +5,12 @@ A easy way to configure the environment after formatting the PC :bowtie: :comput
 ![synth-from-hell](https://github.com/allanesquina/oh-my-dotfiles/raw/master/screenshot.gif)
 
 # Usage
-Run the following command on your terminal
+Run the following command in your terminal
 ```
 wget -qO $HOME/rs.sh https://raw.githubusercontent.com/allanesquina/oh-my-dotfiles/master/setup.sh && bash $HOME/rs.sh && rm $HOME/rs.sh
 ```
 # Important
-- It was made based on Ubuntu 16.0.4 LTS version and I didn't test it in other versions, so please feel free to report any error.
+- It was based on Ubuntu 16.0.4 LTS version and I didn't test it in other versions, so please feel free to report any error.
 
 # TODO 
 ## Feel free to contribute

@@ -43,7 +43,7 @@ setup() {
 	sudo apt-get update
 
 	# Verify if dotfiles folder exists
-	if [ "$DOTFILES" ]; then
+	if [ -d "$DOTFILES" ]; then
 		myecho "Dotfiles is already downloaded"
 		sayok
 	else
